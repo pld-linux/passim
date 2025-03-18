@@ -5,13 +5,13 @@
 Summary:	A local caching server
 Summary(pl.UTF-8):	Lokalny serwer cache'ujący
 Name:		passim
-Version:	0.1.8
+Version:	0.1.9
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/passim/releases
 Source0:	https://github.com/hughsie/passim/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	73926d0fe41f290ba185dcdf8f40c758
+# Source0-md5:	fc5208e32c45619eca31453964a88a34
 URL:		https://github.com/hughsie/passim
 BuildRequires:	gcc >= 6:4.7
 BuildRequires:	glib2-devel >= 1:2.68.0
@@ -21,7 +21,7 @@ BuildRequires:	libsoup3-devel >= 3.4.0
 BuildRequires:	meson >= 0.61.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	systemd-units >= 1:211
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -85,15 +85,15 @@ Statyczna biblioteka Passim.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 # unify locale dir
 %{__mv} $RPM_BUILD_ROOT%{_localedir}/{nb_NO,nb}
@@ -126,7 +126,8 @@ fi
 %{_datadir}/dbus-1/system.d/org.freedesktop.Passim.conf
 %{_datadir}/metainfo/org.freedesktop.Passim.metainfo.xml
 %{_datadir}/passim
-%{_iconsdir}/hicolor/scalable/apps/org.freedesktop.Passim.png
+%{_iconsdir}/hicolor/128x128/apps/org.freedesktop.Passim.png
+%{_iconsdir}/hicolor/scalable/apps/org.freedesktop.Passim.svg
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/passim.conf
 %{systemdunitdir}/passim.service
 /usr/lib/sysusers.d/passim.conf
