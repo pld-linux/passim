@@ -5,13 +5,13 @@
 Summary:	A local caching server
 Summary(pl.UTF-8):	Lokalny serwer cache'ujący
 Name:		passim
-Version:	0.1.9
+Version:	0.1.10
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/passim/releases
 Source0:	https://github.com/hughsie/passim/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	fc5208e32c45619eca31453964a88a34
+# Source0-md5:	0bd96c80fdfecc053c363390d1ddd635
 URL:		https://github.com/hughsie/passim
 BuildRequires:	gcc >= 6:4.7
 BuildRequires:	glib2-devel >= 1:2.68.0
@@ -86,7 +86,8 @@ Statyczna biblioteka Passim.
 
 %build
 %meson \
-	%{!?with_static_libs:--default-library=shared}
+	%{!?with_static_libs:--default-library=shared} \
+	-Dintrospection=enabled
 
 %meson_build
 
@@ -126,7 +127,7 @@ fi
 %{_datadir}/dbus-1/system.d/org.freedesktop.Passim.conf
 %{_datadir}/metainfo/org.freedesktop.Passim.metainfo.xml
 %{_datadir}/passim
-%{_iconsdir}/hicolor/128x128/apps/org.freedesktop.Passim.png
+%{_iconsdir}/hicolor/256x256/apps/org.freedesktop.Passim.png
 %{_iconsdir}/hicolor/scalable/apps/org.freedesktop.Passim.svg
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/passim.conf
 %{systemdunitdir}/passim.service
@@ -139,12 +140,12 @@ fi
 %files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpassim.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpassim.so.1
+%ghost %{_libdir}/libpassim.so.1
 %{_libdir}/girepository-1.0/Passim-1.0.typelib
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpassim.so
+%{_libdir}/libpassim.so
 %{_includedir}/passim-1
 %{_datadir}/gir-1.0/Passim-1.0.gir
 %{_pkgconfigdir}/passim.pc
