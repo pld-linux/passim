@@ -5,13 +5,13 @@
 Summary:	A local caching server
 Summary(pl.UTF-8):	Lokalny serwer cache'ujący
 Name:		passim
-Version:	0.1.10
+Version:	0.1.12
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://github.com/hughsie/passim/releases
 Source0:	https://github.com/hughsie/passim/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	0bd96c80fdfecc053c363390d1ddd635
+# Source0-md5:	a19662c46fe1666f8cfc8ea2ccb86d1f
 URL:		https://github.com/hughsie/passim
 BuildRequires:	gcc >= 6:4.7
 BuildRequires:	glib2-devel >= 1:2.68.0
@@ -139,7 +139,7 @@ fi
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpassim.so.*.*.*
+%{_libdir}/libpassim.so.*.*.*
 %ghost %{_libdir}/libpassim.so.1
 %{_libdir}/girepository-1.0/Passim-1.0.typelib
 
